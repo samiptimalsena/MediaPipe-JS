@@ -1,0 +1,32 @@
+html, body {
+    height: 100%;
+    margin: 0px;
+}
+
+.mainHolder{
+    display: flex;
+    height: 100%;
+}
+.container{
+    margin: 10px;
+    border: blue 3px solid;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+canvas{
+    width: 1280px;
+    height:100%;
+}
+
+img{
+    height: 150px;
+    width: 150px;
+}
+
+.options{
+    margin-left: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
