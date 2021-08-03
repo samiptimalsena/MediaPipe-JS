@@ -4,13 +4,16 @@ const context = canvas.getContext('2d')
 const sunglass = document.getElementById('sunglass');
 const mask = document.getElementById('mask');
 const basketball = document.getElementById('basketball')
+const tika = document.getElementById('tika')
 
-imgPath = './assets/sunglass.png'
+let imgPath = './assets/sunglass.png'
 let i = 162;
 let j = 389;
 let k = 5;
 let delHeight = 40;
+let delWidth = 40;
 let delY = 20;
+let delX = 20;
 let xCenter;
 let yCenter;
 let indexFinger = { x: 100, y: 100 };
@@ -29,6 +32,9 @@ basketball.addEventListener('click', function () {
     imgPath = './assets/basketball.png'
 })
 
+tika.addEventListener('click', function (){
+    imgPath = './assets/tika.png'
+})
 
 context.font = '20px Arial'
 context.fillText("Loading!!!!", canvas.width / 3, canvas.height / 2);
@@ -45,13 +51,25 @@ function onResults1(results) {
             j = 389;
             k = 5;
             delHeight = 40;
+            delWidth = 40;
             delY = 20
-        } else {
+            delX = 20;
+        } else if(imgPath == './assets/mask.png'){
             i = 234;
             j = 454;
             k = 152;
             delHeight = 0;
-            delY = 0
+            delWidth = 40;
+            delY = 0;
+            delX = 20;
+        } else {
+            i = 109;
+            j = 338;
+            k = 8;
+            delHeight = 8;
+            delWidth = 10;
+            delY = 10;
+            delX = 4;
         }
         leftIndex = results.multiFaceLandmarks[0][i]
         rightIndex = results.multiFaceLandmarks[0][j]
@@ -62,9 +80,9 @@ function onResults1(results) {
         height = bottomIndex.y * canvas.height - yCenter
         width = rightIndex.x * canvas.width - xCenter
     }
-    let maskImage = new Image()
-    maskImage.src = imgPath
-    context.drawImage(maskImage, xCenter - 20, yCenter - delY, width + 40, height + delHeight);
+    let image = new Image()
+    image.src = imgPath
+    context.drawImage(image, xCenter - delX, yCenter - delY, width + delWidth, height + delHeight);
 
 
     context.restore();
@@ -126,8 +144,6 @@ const camera = new Camera(video, {
         } else {
             await faceMesh.send({ image: video });
         }
-    },
-    width: 1280,
-    height: 720
+    }
 });
 camera.start()
